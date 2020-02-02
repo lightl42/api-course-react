@@ -25,10 +25,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "summary"="Incremente une facture",
  *              "description"="Incremente le chrono d'une facture donnee"
  *          }
-*       }
-*    },
+ *       }
+ *    },
  *   attributes = {
- *     "pagination_enabled"=true,
+ *     "pagination_enabled"=false,
  *     "pagination_items_per_page"=20,
  *     "order": { "amount": "desc" }
  *   },
@@ -96,7 +96,8 @@ class Invoice
      * @Groups({"invoices_read", "invoices_subresource"})
      * @return User
      */
-    public function getUser(): User {
+    public function getUser(): User
+    {
         return $this->customer->getUser();
     }
 

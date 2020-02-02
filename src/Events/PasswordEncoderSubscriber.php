@@ -36,7 +36,7 @@ class PasswordEncoderSubscriber implements EventSubscriberInterface {
     public function encodePassword(ViewEvent $event)
     {
         $user = $event->getControllerResult(); // Résultat du contrôleur d'API Platform (deserialise le JSON en une entité et la renvoie)
-        dd($user);
+        // dd($user);
         $method = $event->getRequest()->getMethod(); // POST, GET, PUT, ...
         // Comme l'evenement kernel.view va etre appele a chaque requete, tester si on est dans le cas d'un POST User !
         if($user instanceof User && $method === "POST") {

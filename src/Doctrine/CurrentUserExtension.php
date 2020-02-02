@@ -30,7 +30,7 @@ class CurrentUserExtension implements QueryCollectionExtensionInterface, QueryIt
 
         // Si la classe sur laquelle on fait une requete est Customer ou Invoice ET si pas Admin ET si l'utilisateur est connecte (si l'utilisateur n'est pas connecte $user vaudra null)
         if(($resourceClass === Customer::class || $resourceClass === Invoice::class) && !$this->auth->isGranted('ROLE_ADMIN') && $user instanceof User) {
-            dd($queryBuilder); // faire un dump du QueryBuilder et un GET sur Postman pour voir
+            // dd($queryBuilder); // faire un dump du QueryBuilder et un GET sur Postman pour voir
             // Recuperer le 1er alias de la requete
             $rootAlias = $queryBuilder->getRootAliases()[0];
 

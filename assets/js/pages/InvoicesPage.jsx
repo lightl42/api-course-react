@@ -70,7 +70,7 @@ const InvoicesPage = props => {
       i.customer.firstName.toLowerCase().includes(search.toLowerCase()) ||
       i.customer.lastName.toLowerCase().includes(search.toLowerCase()) ||
       i.amount.toString().startsWith(search.toLowerCase()) ||
-      i.status.toLowerCase().includes(search.toLowerCase()) // STATUS_LABELS[i.status].toLowerCase().includes(search.toLowerCase())
+      (typeof STATUS_LABELS[i.status] != 'undefined') && STATUS_LABELS[i.status].toLowerCase().includes(search.toLowerCase())
   );
 
   // Pagination des donnees

@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { HashRouter, Route, Switch, withRouter } from "react-router-dom"; // withRouter : retourne le composant qu'on lui donne en lui donnant les props du routeur !
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -13,15 +15,14 @@ import "../css/app.css";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 import AuthContext from "./contexts/AuthContext";
-import CustomersPage from "./pages/CustomersPage";
 import CustomerPage from "./pages/CustomerPage";
+import CustomersPage from "./pages/CustomersPage";
 import HomePage from "./pages/HomePage";
-import InvoicesPage from "./pages/InvoicesPage";
 import InvoicePage from "./pages/InvoicePage";
+import InvoicesPage from "./pages/InvoicesPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import { default as AuthAPI, default as authAPI } from "./services/authAPI";
-
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 // import $ from 'jquery';
@@ -65,6 +66,7 @@ const App = () => {
           </Switch>
         </main>
       </HashRouter>
+      <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
     </AuthContext.Provider>
   );
 };

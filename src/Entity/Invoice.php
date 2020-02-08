@@ -59,11 +59,11 @@ class Invoice
      */
     private $amount;
 
+    // @Assert\NotBlank(message="La date d'envoi doit être renseignée")
+    // @Assert\DateTime(message="La date doit être au format YYYY-MM-DD")
     /**
      * @ORM\Column(type="datetime")
      * @Groups({"invoices_read", "customers_read", "invoices_subresource"})
-     * @Assert\DateTime(message="La date doit être au format YYYY-MM-DD")
-     * @Assert\NotBlank(message="La date d'envoi doit être renseignée")
      */
     private $sentAt;
 
@@ -71,7 +71,7 @@ class Invoice
      * @ORM\Column(type="string", length=255)
      * @Groups({"invoices_read", "customers_read", "invoices_subresource"})
      * @Assert\NotBlank(message="Le statut de la facture est obligatoire")
-     * @Assert\Choice(choices={"SEND", "PAID", "CANCELLED"}, message="Le statut doit être SEND, PAID ou CANCELLED")
+     * @Assert\Choice(choices={"SENT", "PAID", "CANCELLED"}, message="Le statut doit être SENT, PAID ou CANCELLED")
      */
     private $status;
 
@@ -83,10 +83,10 @@ class Invoice
      */
     private $customer;
 
+    // @Assert\NotBlank(message="Il faut absolument un chrono pour la facture")
     /**
      * @ORM\Column(type="integer")
      * @Groups({"invoices_read", "customers_read", "invoices_subresource"})
-     * @Assert\NotBlank(message="Il faut absolument un chrono pour la facture")
      * @Assert\Type(type="integer", message="Le chrono doit être un nombre")
      */
     private $chrono;

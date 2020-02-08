@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
 import AuthAPI from "../services/authAPI";
 import AuthContext from "../contexts/AuthContext";
+import Field from "../components/forms/Field";
 
 // history : props du Router (react-router-dom)
 // history.push() => Ajoute une adresse a l'historique de navigation ; history.replace() => Remplace l'adresse actuelle a l'historique de navigation
 const LoginPage = ({ history }) => {
-
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   const [credentials, setCredentials] = useState({
@@ -42,33 +42,23 @@ const LoginPage = ({ history }) => {
   return (
     <>
       <h1>Connexion a l'application</h1>
-
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username"></label>
-          <input
-            value={credentials.username}
-            onChange={handleChange}
-            type="email"
-            placeholder="Adresse email de connexion"
-            id="username"
-            name="username"
-            className={"form-control" + (error && " is-invalid")}
-          />
-          {error && <p className="invalid-feedback">{error}</p>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="password"></label>
-          <input
-            value={credentials.password}
-            onChange={handleChange}
-            type="password"
-            placeholder="Mot de passe"
-            id="password"
-            name="password"
-            className="form-control"
-          />
-        </div>
+        <Field
+          label="Adresse email"
+          name="username"
+          value={credentials.username}
+          onChange={handleChange}
+          placeholder="Adresse email de connexion"
+          error={error}
+        />
+        <Field
+          label="Mot de passe"
+          name="password"
+          value={credentials.password}
+          onChange={handleChange}
+          type="password"
+          error=""
+        />
         <div className="form-group">
           <button type="submit" className="btn btn-success">
             Je me connecte

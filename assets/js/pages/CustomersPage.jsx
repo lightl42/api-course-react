@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Pagination from "../components/Pagination";
 import CustomersAPI from "../services/customersAPI";
+import { Link } from "react-router-dom";
 
 /**
  * Classe pour la pagination en Javascript (plus reactif)
@@ -28,7 +29,7 @@ const CustomersPage = props => {
   useEffect(
     () => {
       fetchCustomers();
-    }, 
+    },
     /*
       CustomersAPI.findAll()
       // .get() => declencher une requete HTTP GET sur localhost:8000/api/customers
@@ -91,7 +92,10 @@ const CustomersPage = props => {
 
   return (
     <>
-      <h1>Liste des clients</h1>
+      <div className="mb-3 d-flex justify-content-between align-items-center">
+        <h1>Liste des clients</h1>
+        <Link to="/customers/new" className="btn btn-primary">Créer un client</Link>
+      </div>
 
       <div className="form-group">
         <input

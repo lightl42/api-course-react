@@ -1,5 +1,6 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Pagination from "../components/Pagination";
 import InvoicesAPI from "../services/invoicesAPI";
 
@@ -70,7 +71,8 @@ const InvoicesPage = props => {
       i.customer.firstName.toLowerCase().includes(search.toLowerCase()) ||
       i.customer.lastName.toLowerCase().includes(search.toLowerCase()) ||
       i.amount.toString().startsWith(search.toLowerCase()) ||
-      (typeof STATUS_LABELS[i.status] != 'undefined') && STATUS_LABELS[i.status].toLowerCase().includes(search.toLowerCase())
+      (typeof STATUS_LABELS[i.status] != "undefined" &&
+        STATUS_LABELS[i.status].toLowerCase().includes(search.toLowerCase()))
   );
 
   // Pagination des donnees
@@ -82,7 +84,12 @@ const InvoicesPage = props => {
 
   return (
     <>
-      <h1>Liste des factures</h1>
+      <div className="d-flex justify-content-between align-items-center">
+        <h1>Liste des factures</h1>
+        <Link to="/invoices/new" className="btn btn-primary">
+          Créer une facture
+        </Link>
+      </div>
 
       <div className="form-group">
         <input
@@ -125,7 +132,12 @@ const InvoicesPage = props => {
                 {invoice.amount.toLocaleString()} €
               </td>
               <td>
-                <button className="btn btn-sm btn-primary mr-1">Editer</button>
+                <Link
+                  to={"/invoices/" + invoice.id}
+                  className="btn btn-sm btn-primary mr-1"
+                >
+                  Editer
+                </Link>
                 <button
                   className="btn btn-sm btn-danger"
                   onClick={() => handleDelete(invoice.id)}

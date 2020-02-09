@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Event\ViewEvent;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class EventChronoSubscriber implements EventSubscriberInterface
+class InvoiceChronoSubscriber implements EventSubscriberInterface
 {
 
     private $security;

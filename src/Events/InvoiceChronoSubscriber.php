@@ -31,9 +31,7 @@ class EventChronoSubscriber implements EventSubscriberInterface
 
     public function setChronoForInvoice(ViewEvent $event)
     {
-        // Objet
         $invoice = $event->getControllerResult();
-        // Methode
         $method = $event->getRequest()->getMethod();
         if ($invoice instanceof Invoice && $method === "POST") {
             // Recuperer le prochain chrono de la facture

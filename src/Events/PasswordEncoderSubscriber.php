@@ -11,8 +11,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class PasswordEncoderSubscriber implements EventSubscriberInterface {
-    
+class PasswordEncoderSubscriber implements EventSubscriberInterface
+{
+
     /** @var UserPasswordEncoderInterface */
     private $encoder;
 
@@ -39,7 +40,7 @@ class PasswordEncoderSubscriber implements EventSubscriberInterface {
         // dd($user);
         $method = $event->getRequest()->getMethod(); // POST, GET, PUT, ...
         // Comme l'evenement kernel.view va etre appele a chaque requete, tester si on est dans le cas d'un POST User !
-        if($user instanceof User && $method === "POST") {
+        if ($user instanceof User && $method === "POST") {
             $hash = $this->encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
         }

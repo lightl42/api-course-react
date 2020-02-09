@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Invoice;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Exception;
 
 /**
  * @method Invoice|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,16 +22,21 @@ class InvoiceRepository extends ServiceEntityRepository
     }
 
     // Recuperer le prochain chrono
-    public function findNextChrono(User $user) {
-        return $this->createQueryBuilder("i") // Invoices
-                    ->select("i.chrono") // Chrono des invoices
-                    ->join("i.customer", "c") // Jointure les Customers de ces invoices alias c
-                    ->where("c.user = :user") // Invoices qui ont pour Customer un Customer dont l'utilisateur est $user
-                    ->setParameter("user", $user) // Bind du user
-                    ->orderBy("i.chrono", "DESC") // Tri descendant sur Chrono
-                    ->setMaxResults(1) // Le dernier (le plus grand)
-                    ->getQuery() // Recuperer la requete
-                    ->getSingleScalarResult() + 1; // Uniquement le numero + 1
+    public function findNextChrono(User $user)
+    {
+        try {
+            return $this->createQueryBuilder("i") // Invoices
+                ->select("i.chrono") // Chrono des invoices
+                ->join("i.customer", "c") // Jointure les Customers de ces invoices alias c
+                ->where("c.user = :user") // Invoices qui ont pour Customer un Customer dont l'utilisateur est $user
+                ->setParameter("user", $user) // Bind du user
+                ->orderBy("i.chrono", "DESC") // Tri descendant sur Chrono
+                ->setMaxResults(1) // Le dernier (le plus grand)
+                ->getQuery() // Recuperer la requete
+                ->getSingleScalarResult() + 1; // Uniquement le numero + 1
+        } catch (\Exception $e) {
+            return 1;
+        }
     }
 
     // /**

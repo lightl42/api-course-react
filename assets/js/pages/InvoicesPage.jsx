@@ -33,6 +33,7 @@ const InvoicesPage = props => {
       setLoading(false);
     } catch (error) {
       toast.error("Erreur lors du chargement des factures");
+      setLoading(false);
     }
   };
 
@@ -52,6 +53,7 @@ const InvoicesPage = props => {
 
   // Supprimer une invoice
   const handleDelete = async id => {
+    
     // Copie originale du tableau des invoices
     const originalInvoices = [...invoices];
 
@@ -60,7 +62,7 @@ const InvoicesPage = props => {
 
     try {
       await InvoicesAPI.delete(id);
-      toast.success("La facture a bien été supprimée");
+      toast.success("La facture " + id + " a bien été supprimée");
     } catch (error) {
       toast.error("Une erreur est survenue");
       setInvoices(originalInvoices);
@@ -147,7 +149,11 @@ const InvoicesPage = props => {
                   </Link>
                   <button
                     className="btn btn-sm btn-danger"
-                    onClick={() => handleDelete(invoice.id)}
+                    onClick={() => {
+                      window.confirm(
+                        "Etes-vous sur de vouloir supprimer cette facture ?"
+                      ) && handleDelete(invoice.id);
+                    }}
                   >
                     Supprimer
                   </button>

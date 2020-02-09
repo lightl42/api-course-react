@@ -25,6 +25,7 @@ const CustomersPage = props => {
       setLoading(false);
     } catch (error) {
       toast.error("Impossible de charger les clients");
+      setLoading(false);
     }
   };
 
@@ -149,7 +150,11 @@ const CustomersPage = props => {
                 </td>
                 <td>
                   <button
-                    onClick={() => handleDelete(customer.id)}
+                    onClick={() => {
+                      window.confirm(
+                        "Etes-vous sur de vouloir supprimer ce client ?"
+                      ) && handleDelete(customer.id);
+                    }}
                     disabled={customer.invoices.length > 0}
                     className="btn btn-sm btn-danger"
                   >
